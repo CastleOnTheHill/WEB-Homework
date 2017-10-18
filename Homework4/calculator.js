@@ -1,24 +1,21 @@
 
-
-
-
-function calculate() {
-	for (var i = 0; i < stack.length - 1; i++) {
-		if(Number(stack[i]) != NaN) {
-			var n = i + 1;
-			while (stack[n] != NaN && n < stack.length) {
-				n++;
-			}
-			var total = 0;
-			for (var k = i; k < n; k++) {
-				total *= 10;
-				total += stack[k];
-			}
-			stack.splice(i, n - i, total);
-		}
+window.onload = function(){
+	var stack = new Array();
+	function show() {
+		var x = stack.join("");
+		alert(stack.length)
+		document.getElementById("output").textContent = x;
 	}
-	// for (var i = 0; i < stack.length; i++) {
-	// 	if(stack[i] == '*' || stack[i] == '/'){
-	// 	}
+
+	function update_stack(ele) {
+		stack.push(ele);
+		show();
+	}		
+
+
+	function calculate() {
+		var x = stack.join("");
+		document.getElementById("output").textContent = eval(x);
 	}
+
 }
