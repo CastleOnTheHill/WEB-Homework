@@ -57,14 +57,17 @@ function check_error(){
 				continue;
 			}
 		}
-		else if(stack[count] == '+' ||stack[count] == '-' ||stack[count] == '*' ||stack[count] == '/') {
-			if(last_ele != 1) return false;
-			else {
-				last_ele = 2;
-				count++;
-				point_sign = 0;
-				continue;
+		else if(stack[count] == '+' || stack[count] == '-' || stack[count] == '*' || stack[count] == '/') {
+			if(last_ele != 1) {
+				if(last_ele == 0) {
+					if(stack[count] == '*' || stack[count] == '/') return false;
+				}
+				else return false;
 			}
+			last_ele = 2;
+			count++;
+			point_sign = 0;
+			continue;
 		}
 		else {
 			if(last_ele != 1 || point_sign == 1) return false;
