@@ -34,6 +34,10 @@ button:hover {
 	background-color: #DDDDDD;
 }
 
+button:active {
+	background-color: #ada9a9;
+}
+
 
 
 #output {
