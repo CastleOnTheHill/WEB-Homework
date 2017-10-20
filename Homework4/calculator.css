@@ -9,7 +9,7 @@ body {
 	margin-right: auto;
 	margin-top: 22%;
 	border-style: solid;
-	border-width: 14px;
+	border-width: 1px;
 	border-color: #e0dbdb;
 
 }
@@ -23,7 +23,7 @@ p {
 	text-shadow: 1px 1px 3px #666666, -1px -1px 3px #ffffff;
 }
 button {
-	width: 71px;
+	width: 25%;
 	height: 50px;
 	border: none;
 	font-weight: bold;

@@ -27,10 +27,12 @@ function update_stack(event) {
 	show();
 }
 function check_error(){
-	var num_count = 0, operator_count = 0, left_brackets_count = 0, last_ele = 0, point_sign = 0, count = 0; // last ele: 1 stands for number, 2 stands for operator, 3 stands for LeftBracket, 4 stands for RightBracket;
+	var num_count = 0, operator_count = 0, left_brackets_count = 0, last_ele = 0, point_sign = 0, count = 0;
+
+	 // last ele: 1 stands for number, 2 stands for operator, 3 stands for LeftBracket, 4 stands for RightBracket;
 	while (count < stack.length) {
 		if(!isNaN(stack[count])){
-			if(last_ele == 3) return false;
+			if(last_ele == 4) return false;
 			else {
 				last_ele = 1;
 				count++;
@@ -58,7 +60,7 @@ function check_error(){
 			}
 		}
 		else if(stack[count] == '+' || stack[count] == '-' || stack[count] == '*' || stack[count] == '/') {
-			if(last_ele != 1) {
+			if(last_ele != 1 && last_ele != 4) {
 				if(last_ele == 0) {
 					if(stack[count] == '*' || stack[count] == '/') return false;
 				}
