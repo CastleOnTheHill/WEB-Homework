@@ -1,0 +1,159 @@
+ body {
+ 	padding: 0px;
+ 	margin: 0px;
+ 	overflow: hidden;
+ 	width: 500px;
+ 	margin-left: auto;
+ 	margin-right: auto;
+ }
+
+ h1, h2, h3, h4, p {
+ 	font-weight: lighter;
+ 	text-align: center;
+ }
+ h3, h4 {
+ 	font-size: 14px;
+ }
+ #sample_walls {
+ 	border: 1px solid black;
+ 	margin-left: 210px;
+ 	width: 64px;
+ 	height: 15px;
+ 	background-color: lightgrey;
+ 	display: inline-block;
+ }
+
+ #maze {
+ 	width: 330px;
+ 	height: 196px;
+ 	margin-left: 80px;
+ 	top: 20px;
+ 	position: relative;
+ }
+
+ #walls div {
+ 	background-color: lightgrey;
+ 	display: inline-block;
+ 	position: absolute;
+ 	border-style: solid;
+ 	border-color: black; 	
+ }
+
+
+ #walls #wall_1 {
+ 	width: 109px;
+ 	height: 124px;
+ 	border-width: 1px 1px 1px 1px;
+ }
+ #walls #wall_2 {
+ 	width: 113px;
+ 	height: 24px;
+ 	left: 109px;
+ 	border-width: 1px 0px 1px 0px;
+ 	z-index: 1;
+ }
+ #walls #wall_3 {
+ 	width: 109px;
+ 	height: 124px;
+ 	left: 221px;
+ 	border-width: 1px 1px 1px 1px;
+ }
+
+ #walls #wall_4 {
+ 	width: 135px;
+ 	height: 22px;
+ 	top: 151px;
+ 	left: 1px;
+ 	border-width: 1px 0px 1px 1px;
+ }
+ #walls #wall_5 {
+ 	width: 197px;
+ 	height: 22px;
+ 	top: 151px;
+ 	left: 133px;
+ 	border-width: 1px 1px 1px 0px;
+ } 
+
+ #walls #wall_6 {
+ 	width: 58px;
+ 	height: 102px;
+ 	top: 49px;
+ 	left: 137px;
+ 	border-width: 1px 1px 0px 1px;
+ 	z-index: 1;
+ }  
+
+ #path #start {
+ 	top: 127px;
+ 	width: 20px;
+ 	height: 20px;
+ 	font-weight: bold;
+ 	text-align: center;
+ 	border: 1px solid black;
+ 	background-color: lightgreen;
+ 	position: absolute;
+ }
+ #path #end {
+ 	top: 127px;
+ 	left: 309px;
+ 	width: 20px;
+ 	height: 20px;
+ 	text-align: center;
+ 	font-weight: bold;
+ 	border: 1px solid black;
+ 	background-color: #5658f4;
+ 	position: absolute; 	
+ }
+ #path #road_1 {
+ 	width: 110px;
+ 	height: 22px;
+ 	top: 127px;
+ 	left: 23px;
+ 	position: absolute;
+ }
+ #path #road_2 {
+ 	width: 22px;
+ 	height: 98px;
+ 	top: 27px;
+ 	left: 111px;
+ 	position: absolute;
+ }
+  #path #road_3 {
+ 	width: 63px;
+ 	height: 22px;
+ 	top: 27px;
+ 	left: 134px;
+ 	position: absolute;
+ } 
+
+  #path #road_4 {
+ 	width: 22px;
+ 	height: 98px;
+ 	top: 27px;
+ 	left: 198px;
+ 	position: absolute;
+ } 
+  #path #road_5 {
+ 	width: 109px;
+ 	height: 22px;
+ 	top: 127px;
+ 	left: 198px;
+ 	position: absolute;
+ }
+
+.touch {
+	background-color: lightgrey !important;
+}
+
+.touch:hover{
+	background-color: red !important;
+}
+
+#result {
+	visibility: hidden;
+	font-size: 14px;
+}
+
+.result_show {
+	visibility: visible !important;
+}
