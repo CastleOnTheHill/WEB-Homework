@@ -49,6 +49,7 @@ function stop() {
 }
 
 function end() {
+    start_sign = 1;
     if (wall_sign == 1) {
         lose_sign = 1;
         document.getElementById("result").textContent = "You Lose.";
