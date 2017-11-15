@@ -1,46 +1,98 @@
 window.onload = function() {
-	var main = document.getElementById("main");
-	for (var i = 0; i < 9; i++) {
-		var newdiv = document.createElement('div');
-		newdiv.className = 'map';
-		main.appendChild(newdiv);
+	$("button").eq(0).click(start);
+	$("button").eq(1).click(change);
+}
+
+var dir = [1, -1, 3, -3];
+
+function start() {
+	if($(".map").length == 0) {
+		for(var i = 0; i < 9; i++) {
+			var class_name = "Allparts map part" + (i + 1);
+			var new_div = $("<div></div>").addClass(class_name);
+			$("#main").append(new_div);
+		}
 	}
-	var maps = document.getElementsByClassName('map');
-	for (var i = 0; i < 9; i++) {
-		var id = " part" + (i + 1);
-		maps[i].className +=  id;
-	}
+	$(".map").css("background-image" ,$("#main").css("background-image"));	
+	mix();
 	$(".map").click(function() {
-		var temp = [1, -1, 3, -3];
 		var index = $(this).index();
-		for (var i = temp.length - 1; i >= 0; i--) {
-		 	if(index + temp[i] >= 0 && index + temp[i] <= 8 && $(".map").eq(index + temp[i]).hasClass('part9')){
+		for (var i = dir.length - 1; i >= 0; i--) {
+		 	if(index + dir[i] >= 0 && index + dir[i] <= 8 && $(".map").eq(index + dir[i]).hasClass('part9')){
+				if(dir[i] == 1 && (index == 2 || index == 5)) continue;
+				if(dir[i] == -1 && (index == 3 || index == 6)) continue;
 				var mid = this.className;
-				this.className = $(".map").eq(index + temp[i]).className;
-				$(".map").eq(index + temp[i]).removeClass('part9');
-				$(".map").eq(index + temp[i]).addClass(mid);
+				this.className = $(".map").eq(index + dir[i]).attr("class");
+			  $(".map").eq(index + dir[i]).removeClass().addClass(mid);
 				break;		 		
 		 	}
 		 }
 	});
-	// main.addEventListener('click', function(event){
-	// 	alert("yse");
-	// 	var temp = [1, -1, 3, -3];
-	// 	var index = $(event.target).index();
-	// 	for (var i = temp.length - 1; i >= 0; i--) {
-	// 	 	if(index + temp[i] >= 0 && index + temp <= 8 && $("#main:gt(index + temp[i])").hasClass('part9')){
-	// 			var mid = event.target.className;
-	// 			event.target.className = $("#main:gt(index + temp[i])").className;
-	// 			$("#main:gt(index + temp[i])").className = mid;
-	// 			break;
-	// 	 	}
-	// 	 } 
-	// });
-
-	// $("#main").click(function)
-
-
+	$(".map").click(function(){
+		var winFlag = true;
+		$(".map").each(function(){
+			var rightName = "part" + ($(this).index() + 1);
+			if(!$(this).hasClass(rightName)) {
+				winFlag = false;
+				return false;
+			}  
+		})
+		if(winFlag) {
+			alert("e");
+			$(".map").remove();
+		}
+	})
+}
 
 
+function mix() {
+	var blank_pos =	8;
+	var count = 0;
+	while(count < 10) {
+		var other_pos = dir[Math.ceil(Math.random() * 10) % 4] + blank_pos;
+		while(other_pos < 0 || other_pos > 8){
+			var random_dir = dir[Math.ceil(Math.random() * 10) % 4]
+			if(random_dir == 1 && (blank_pos == 2 || blank_pos == 5)) continue;
+			if(random_dir == -1 && (blank_pos == 3 || blank_pos == 6)) continue;
+			other_pos = random_dir + blank_pos;
+		}
+		other = $(".map").eq(other_pos);
+		blank = $(".map").eq(blank_pos);
+		var mid_name = blank.attr("class");
+		blank.removeClass().addClass(other.attr("class"));
+		other.removeClass().addClass(mid_name);
+		blank_pos = other_pos;
+		count ++;		
+	}
+}
 
+function change() {
+	if($("#platform div").length == 0) {
+		$("#main").addClass("change");
+		$("body").append($("<div></div>").attr("id", "platform"));
+		for(var i = 0; i < 3; i++) {
+		switch(i) {
+			case 0: 
+				var temp = $("<div></div>").addClass("img_panda");
+				break;
+			case 1: 
+				var temp = $("<div></div>").addClass("img_Gakki");
+				break;
+			case 2: 
+				var temp = $("<div></div>").addClass("img_Girl");
+				break;
+		}
+		$("#platform").append(temp);
+		}
+		$("#platform div").click(function() {
+			$("#main").css("background-image" ,$(this).css("background-image"));
+			$(".map").css("background-image" ,$(this).css("background-image"));
+			$("#platform").remove();
+			$("#main").removeClass("change");			
+		})
+	}
+	else {
+		$("#platform").remove();
+		$("#main").removeClass("change");
+	}
 }
