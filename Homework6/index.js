@@ -38,7 +38,6 @@ function start() {
 			}  
 		})
 		if(winFlag) {
-			alert("e");
 			$(".map").remove();
 		}
 	})
