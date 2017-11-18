@@ -3,11 +3,11 @@ window.onload = function() {
 	$("button").eq(1).click(change);
 }
 
-var dir = [1, -1, 3, -3];
+var dir = [1, -1, 4, -4];
 
 function start() {
 	if($(".map").length == 0) {
-		for(var i = 0; i < 9; i++) {
+		for(var i = 0; i < 16; i++) {
 			var class_name = "Allparts map part" + (i + 1);
 			var new_div = $("<div></div>").addClass(class_name);
 			$("#main").append(new_div);
@@ -18,9 +18,9 @@ function start() {
 	$(".map").click(function() {
 		var index = $(this).index();
 		for (var i = dir.length - 1; i >= 0; i--) {
-		 	if(index + dir[i] >= 0 && index + dir[i] <= 8 && $(".map").eq(index + dir[i]).hasClass('part9')){
-				if(dir[i] == 1 && (index == 2 || index == 5)) continue;
-				if(dir[i] == -1 && (index == 3 || index == 6)) continue;
+		 	if(index + dir[i] > 0 && index + dir[i] <= 16 && $(".map").eq(index + dir[i]).hasClass('part16')){
+				if(dir[i] == 1 && (index == 3 || index == 7 || index == 11)) continue;
+				if(dir[i] == -1 && (index == 4 || index == 8 || index == 12)) continue;
 				var mid = this.className;
 				this.className = $(".map").eq(index + dir[i]).attr("class");
 			  $(".map").eq(index + dir[i]).removeClass().addClass(mid);
@@ -45,14 +45,14 @@ function start() {
 
 
 function mix() {
-	var blank_pos =	8;
+	var blank_pos =	15;
 	var count = 0;
 	while(count < 10) {
-		var other_pos = dir[Math.ceil(Math.random() * 10) % 4] + blank_pos;
-		while(other_pos < 0 || other_pos > 8){
+		var other_pos = -1;
+		while(other_pos < 0 || other_pos > 15){
 			var random_dir = dir[Math.ceil(Math.random() * 10) % 4]
-			if(random_dir == 1 && (blank_pos == 2 || blank_pos == 5)) continue;
-			if(random_dir == -1 && (blank_pos == 3 || blank_pos == 6)) continue;
+			if(random_dir == 1 && (blank_pos == 3 || blank_pos == 7 || blank_pos == 11)) continue;
+			if(random_dir == -1 && (blank_pos == 4 || blank_pos == 8 || blank_pos == 12)) continue;
 			other_pos = random_dir + blank_pos;
 		}
 		other = $(".map").eq(other_pos);
