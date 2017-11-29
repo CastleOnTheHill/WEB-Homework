@@ -32,7 +32,7 @@ body {
 
 .Allparts {
 	/*transition: transform 0.3s;*/
-	transition: all 0.5s;
+	transition: all 0.3s;
 }
 
 .Allparts:hover {
@@ -40,85 +40,23 @@ body {
 }
 
 
-.part1
-{
-  background-position: 0px 0px;
-}
-
-.part2
-{
-  background-position: -93px 0px;
-}
-
-.part3
-{
-  background-position: -186px 0px;
-}
-
-.part4
-{
-  background-position: -279px 0px;
-}
-
-.part5
-{
-  background-position: 0px -93px;
-}
-
-.part6
-{
-  background-position: -93px -93px;
-}
-
-.part7
-{
-  background-position: -186px -93px;
-}
-
-.part8
-{
-  background-position: -279px -93px;
-}
-
-.part9
-{
-  background-position: 0px -186px;
-}
-
-.part10
-{
-  background-position: -93px -186px;
-}
-
-.part11
-{
-  background-position: -186px -186px;
-}
-
-
-.part12
-{
-  background-position: -279px -186px;
-}
-
-.part13
-{
-  background-position: 0px -279px;
-}
-
-.part14
-{
-  background-position: -93px -279px;
-}
-
-.part15
-{
-  background-position: -186px -279px;
-}
-
+.part1 { background-position: 0 0;}
+.part2 { background-position: -88px 0;}
+.part3 { background-position: -176px 0;}
+.part4 { background-position: -264px 0;}
+.part5 { background-position: 0 -88px;}
+.part6 { background-position: -88px -88px;}
+.part7 { background-position: -176px -88px;}
+.part8 { background-position: -264px -88px;}
+.part9 { background-position: 0 -176px;}
+.part10 { background-position: -88px -176px;}
+.part11 { background-position: -176px -176px;}
+.part12 { background-position: -264px -176px;}
+.part13 { background-position: 0px -264px;}
+.part14 { background-position: -88px -264px;}
+.part15 { background-position: -176px -264px;}
 .part16
 {
-  background-position: -279px -279px;
   background-image: url(white.png) !important;
   border: none;
 }
@@ -155,7 +93,7 @@ body {
 
 #platform div {
 	display: inline-block;
-	margin-left: 30px;
+	margin-left: 25px;
 	margin-top: 35px;
 	width: 264px;
 	height: 264px;

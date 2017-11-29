@@ -18,7 +18,7 @@ function start() {
 	$(".map").click(function() {
 		var index = $(this).index();
 		for (var i = dir.length - 1; i >= 0; i--) {
-		 	if(index + dir[i] > 0 && index + dir[i] <= 16 && $(".map").eq(index + dir[i]).hasClass('part16')){
+		 	if(index + dir[i] >= 0 && index + dir[i] <= 15&& $(".map").eq(index + dir[i]).hasClass('part16')){
 				if(dir[i] == 1 && (index == 3 || index == 7 || index == 11)) continue;
 				if(dir[i] == -1 && (index == 4 || index == 8 || index == 12)) continue;
 				var mid = this.className;
@@ -47,7 +47,7 @@ function start() {
 function mix() {
 	var blank_pos =	15;
 	var count = 0;
-	while(count < 10) {
+	while(count < 50) {
 		var other_pos = -1;
 		while(other_pos < 0 || other_pos > 15){
 			var random_dir = dir[Math.ceil(Math.random() * 10) % 4]
