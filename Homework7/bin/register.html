@@ -3,15 +3,18 @@
 <head>
 	<title>Reister</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../css/register.css">
+	<link rel="stylesheet" type="text/css" href="register.css">
+	<script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>	
+	<script type="text/javascript" src="register.js"></script>
+	
 </head>
 <body>
 	<form method="post">
 		<p>用户注册</p>
-		用户名： <input type="text" name="name"><br>
-		学<div class="hid">密</div>号： <input type="text" name="schoolId"><br>
-		电<div class="hid">密</div>话： <input type="text" name="phoneNumber"><br>
-		邮<div class="hid">密</div>箱： <input type="text" name="email"><br>
+		用户名： <input type="text" name="name"><div class="msg"></div><br>
+		学<div class="hid">密</div>号： <input type="text" name="schoolId"><div class="msg"></div><br>
+		电<div class="hid">密</div>话： <input type="text" name="phoneNumber"><div class="msg"></div><br>
+		邮<div class="hid">密</div>箱： <input type="text" name="email"><div class="msg"></div><br>
 		<button type="reset">重置</button> <button type="submit">提交</button>
 	</form>
 </body>

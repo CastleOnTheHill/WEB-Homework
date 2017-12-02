@@ -8,6 +8,9 @@ body {
 	display: inline-block;
 	visibility: hidden;
 }
+.msg {
+	display: inline-block;
+}
 
 form p {
 	font-size: 20px;
