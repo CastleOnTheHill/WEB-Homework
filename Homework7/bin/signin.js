@@ -1,81 +1,167 @@
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
+var events = require('events');
 var querystring = require('querystring');
+var path = require('path');
+var eventController = new events.EventEmitter();
+var dataChange_flag = true;
+var userPos = 0;
+var allUsers = '';
+var theUser = {
+    name: '',
+    schoolId: '',
+    phoneNumber: '',
+    email: ''
+}
 
-http.createServer(function (request, response) {
-	var flag = false, pos = 0;
-	var params = url.parse(request.url, true);
-	var user = '';
-	var register_h = '';
-	var register_c = '';
-	// console.log(params);
-	var pathname = params.pathname;
-	var query = params.query;
-	var theUser = {
-		"name": undefined,
-		"schoolId": undefined,
-		"phoneNumber":undefined,
-		"email":undefined
-		// "name":"aRhino",
-		// "schoolId":"16340076",
-		// "phoneNumber":"17620181219",
-		// "email":"xx@qq.com"		
-	}
-	console.log(pathname);
-	if(/(css|js)$/.test(pathname)){
-		fs.readFile(pathname.substr(1), function(err ,data) {
-			console.log(pathname.match(/(css|js)$/));
-			response.writeHead(200, {'Content-Type': 'text/' + pathname.match(/(css|js)$/)});
-			response.write(data.toString());
-			response.end();
-		});
-	}
-	else if(/json/.test(pathname)) {
-		// fs.readFile(pathname.substr(1), function(err ,data) {
-		// 	console.log("000");
-		// 	response.writeHead(200, {'Content-Type': 'charset=utf-8'});
-		// 	response.end(data);
-		// });	
-		response.writeHead(200, {'Content-Type': 'charset=utf-8'});
-		response.end(JSON.stringify(theUser));	
-	}
-
-
-	else {
-	if(typeof(query.username) != "undefined") {
-		fs.readFile(__dirname + "/users.json", 'utf8', function (err, data) {
-			if(err) {
-				console.log(err);
-			}
-			data = JSON.parse(data);
-			for (var i = data.length - 1; i >= 0; i--) {
-				if(data[i].name == query.username) {
-					flag = true;
-					pos = i;
-					break;
-				}
-			}
-			if(flag) {
-				// console.log("Find the user");
-				fs.readFile(__dirname + "/detailed.html", function(err, data) {
-					response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});		
-					response.write(data.toString());
-					response.end();
-				});
-
-			}	
-			else{
-				// console.log("No such user");
-				response.end();
-			}
-		});
-	}
-	else {
-		response.end();
-	}
+var errMsg = {
+    nameRE: false,
+    schoolIdRE: false,
+    phoneNumberRE: false,
+    emailRE: false
 }
 
 
+http.createServer(function(request, response) {
+
+    var params = url.parse(request.url, true);
+    var pathname = params.pathname;
+    var query = params.query;
+    console.log("pathname: " + pathname);
+    var Show_register = function() {
+        console.log("Function :Show_register");
+        fs.readFile(__dirname + "/../lib/register.html", 'utf8', function(err, data) {
+            if (err) console.log(err);
+            else {
+                response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+                response.write(data.toString());
+                response.end();
+            }
+        });
+    }
+
+    var Show_detailed = function() {
+        console.log("Function :Show_detailed");
+        fs.readFile(__dirname + "/../lib/detailed.html", function(err, data) {
+            response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+            response.write(data.toString());
+            response.end();
+        });
+    }
+    var handleQuery = function() {
+        console.log("Function :handleQuery");
+        var exist_flag = false;
+        if (typeof(query.username) != "undefined") {
+            for (var i = allUsers.length - 1; i >= 0; i--) {
+                if (allUsers[i].name == query.username) {
+                    exist_flag = true;
+                    theUser.name = allUsers[i].name;
+                    theUser.schoolId = allUsers[i].schoolId;
+                    theUser.phoneNumber = allUsers[i].phoneNumber;
+                    theUser.email = allUsers[i].email;
+                    break;
+                }
+            }
+            if (exist_flag) {
+                Show_detailed();
+            } else {
+                console.log("handleQuery Show_register");
+                Show_register();
+            }
+            return true;
+        }
+        return false;
+    }
+
+
+    var GETmethod = function() {
+        console.log("Function :GETmethod");
+        if (pathname != '/') {
+            fs.readFile(__dirname + "/../lib/" + pathname.substr(1), function(err, data) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(pathname);
+                    console.log(pathname.substr(pathname.lastIndexOf('.') + 1));
+                    if (/json/.test(pathname)) {
+                        response.writeHead(200, { 'Content-Type': 'charset=utf-8' });
+                        if (/err/.test(pathname)) {
+                            response.end(JSON.stringify(errMsg));
+                            errMsg.nameRE = false;
+                            errMsg.schoolIdRE = false;
+                            errMsg.phoneNumberRE = false;
+                            errMsg.emailRE = false;
+                        } else
+                            console.log(theUser);
+                        response.end(JSON.stringify(theUser));
+                    } else {
+                        response.writeHead(200, { 'Content-Type': 'text/' + pathname.substr(pathname.lastIndexOf('.') + 1) });
+                        response.write(data);
+                        response.end();
+                    }
+                }
+            });
+            return true;
+        } else return false;
+    }
+
+    var start = function() {
+        console.log("Function :getAllusers");
+        fs.readFile(__dirname + "/../lib/users.json", 'utf8', function(err, data) {
+            if (err) {
+                console.log(err);
+            }
+            allUsers = JSON.parse(data);
+            var post = '';
+            var valid_flag = true;
+            request.on('data', function(chunk) {
+                post += chunk;
+            });
+            request.on('end', function() {
+                console.log("on data end");
+                post = querystring.parse(post);
+                if (post.name && post.schoolId && post.phoneNumber && post.email) {
+                    console.log("Has post request");
+                    for (var i = allUsers.length - 1; i >= 0; i--) {
+                        if (allUsers[i].name == post.name ||
+                            allUsers[i].schoolId == post.schoolId ||
+                            allUsers[i].phoneNumber == post.phoneNumber ||
+                            allUsers[i].email == post.email) {
+                            if (allUsers[i].name == post.name) errMsg.nameRE = true;
+                            if (allUsers[i].schoolId == post.schoolId) errMsg.schoolIdRE = true;
+                            if (allUsers[i].phoneNumber == post.phoneNumber) errMsg.phoneNumberRE = true;
+                            if (allUsers[i].email == post.email) errMsg.emailRE = true;
+                            valid_flag = false;
+                            break;
+                        }
+                    }
+                    if (valid_flag) {
+                        theUser.name = post.name;
+                        theUser.schoolId = post.schoolId;
+                        theUser.phoneNumber = post.phoneNumber;
+                        theUser.email = post.email;
+                        allUsers.push(theUser);
+                        fs.writeFile(__dirname + "/../lib/users.json", JSON.stringify(allUsers), function(err) {
+                            if (err) console.log(err);
+                        });
+                        Show_detailed();
+                    } else {
+                        Show_register();
+                    }
+                } else {
+                    if (handleQuery()) return;
+                    if (GETmethod()) return;
+                    if (pathname == '/' && typeof(query.username) == "undefined") {
+                        console.log("Nothing happends");
+                        Show_register();
+                    }
+                }
+            });
+        });
+
+    }
+
+    start();
 
 }).listen(8000);
