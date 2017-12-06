@@ -1,0 +1,222 @@
+/*Rhino at 9.28*/
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+}
+
+#at-plus-container {
+  position: relative;
+  width: 155px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+#bottom-positioner {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+/*细节*/
+
+#info-bar {
+  text-align: center;
+  font-size: 70px;
+  color: #00FFD1;
+  position: absolute;
+  width: 128px;
+  height: 128px;
+  bottom: 52px;
+  left: 24px;
+  border-radius: 50%;
+  background-color: #7E7E7E;
+  transition: all 0.5s;
+  opacity: 0;
+  transition-delay: 0.3s;
+  z-index: 1;
+}
+
+#button:hover #info-bar {
+  bottom: 136px;
+  left: 25px;
+  opacity: 1;
+}
+
+#info-bar li {
+  list-style: none;
+}
+
+#info-bar li img {
+  vertical-align: middle;
+}
+
+#info-bar li:nth-child(1) span {
+  color: #FFFFFF;
+  margin-left: 8px;
+}
+#info-bar li:nth-child(2) span {
+  color: #FFFFFF;
+  margin-left: 8px;
+  font-size: 20pt;
+}
+#info-bar li:nth-child(3){
+  display: inline-block;
+  margin-left: -20px;
+  margin-top: 11px;
+  margin-right: 7px;
+  width: 50%;  
+}
+#info-bar li:nth-child(3) span {
+  color: #00FFD1;
+  margin-left: 8px;
+}
+#info-bar li:nth-child(4){
+  display: inline-block;
+  width: 50%;
+}
+#info-bar li:nth-child(4) span {
+  color: #00FFD1;
+  margin-left: 8px;
+}
+
+
+#control-ring-container {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  bottom: 20px;
+  left: 0;
+}
+
+#button {
+  width: 51px;
+  height: 51px;
+  margin-left: 64px;
+  margin-bottom: 79px
+}
+#button .apb {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  bottom: 91px;
+  left: 76px;
+  border-radius: 50%;
+  background-color: #303f9f;
+  background-size: 19px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("../images/atplus_white.png");
+  transition: all 0.5s;
+  transition-delay: 0.5s;
+  opacity: 0.5;
+}
+
+#button:hover .apb {
+  width: 51px;
+  height: 51px;
+  bottom: 79px;
+  left: 64px;
+  background-size: 40px;
+  background-image: url("../images/atplus_green.png");
+  opacity: 1;
+}
+
+#control-ring-container li {
+  text-align: center;
+  font-size: 22px;
+  color: white;
+  font-weight: bold;
+  list-style: none;
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #303f9f;
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: 17px 16px;
+  transition: all 0.5s;
+  opacity: 0;
+  transition-delay: 0.3s;
+
+}
+
+
+#button:hover #control-ring-container li {
+  opacity: 1;
+}
+
+#control-ring-container li {
+  bottom: 67px;
+  left: 73px;
+}
+
+
+
+/*#control-ring-container li:nth-child(1) {
+  background-image: url("../images/nomask.png");
+}
+
+#control-ring-container li:nth-child(2) {
+  background-image: url("../images/history.png");
+}
+#control-ring-container li:nth-child(3) {
+  background-image: url("../images/message.png");
+}
+#control-ring-container li:nth-child(4) {
+  background-image: url("../images/setting.png");
+}
+#control-ring-container li:nth-child(5) {
+  background-image: url("../images/signin.png");
+}*/
+
+#button:hover #control-ring-container li:nth-child(1) {
+  left: 7px;
+  bottom: 104px;
+  /*background-image: url("../images/nomask.png");*/
+}
+
+#button:hover #control-ring-container li:nth-child(2) {
+  left: 0px;
+  bottom: 65px;
+  /*background-image: url("../images/history.png");*/
+}
+#button:hover #control-ring-container li:nth-child(3) {
+  left: 16px;
+  bottom: 26px;
+  /*background-image: url("../images/message.png");*/
+}
+#button:hover #control-ring-container li:nth-child(4) {
+  left: 52px;
+  bottom: 2px;
+  /*background-image: url("../images/setting.png");*/
+}
+#button:hover #control-ring-container li:nth-child(5) {
+  left: 96px;
+  bottom: 2px;
+  /*background-image: url("../images/signin.png");*/
+}
+
+#control-ring-container li span {
+  font-size: 13px;
+  position: absolute;
+  text-align: center;
+  right: -10px;
+  top: -7px;
+  width: 20px;
+  height: 20px;
+  color: #FFFFFF;
+  border-radius: 50px;
+  background-color: red;
+  background-position: center;
+  /*visibility: hidden;*/
+}
+
+#control-ring li {
+  z-index: 2;
+}
