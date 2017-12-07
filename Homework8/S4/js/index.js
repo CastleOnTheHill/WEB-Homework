@@ -1,5 +1,7 @@
 
 var visited_count = 0;
+var Gaming = false;
+var requestCounter = 0;
 var order = [];
 $(document).ready(function() {
 	
@@ -19,6 +21,7 @@ $(document).ready(function() {
 	// });
 	$("#button").mouseleave(function() {
 		// alert("HERE");
+		Gaming = false;
 		$("#control-ring-container li span").hide();
 		$("#showOrder").hide();
 		$("#control-ring-container li").attr("visited", "");
@@ -28,10 +31,8 @@ $(document).ready(function() {
 		$("#control-ring li").css("color", "white");
 		$("#info-bar").text("");
 		order.splice(0, order.length);
-		$("#control-ring-container li span").each(function() {
-			$(this).html("");
-		});
-		alert(order.length);
+		$("#control-ring-container li span").html("");
+		// alert(order.length);
 		visited_count = 0;	
 		$("#button").one("click", Robot);	
 	});
@@ -40,6 +41,7 @@ $(document).ready(function() {
 });
 
 function Robot() {
+	Gaming = true;
 	var JQobjects = [];
 	var orderText = ["The Order is"];
 	$("#control-ring-container li").each(function() {
@@ -48,7 +50,7 @@ function Robot() {
 	for(var i = 5; i >= 1; i--) {
 		var Random_num = Math.ceil((Math.random() * 100)) % i;
 		order.push(JQobjects[Random_num]);
-		orderText.push(JQobjects[Random_num].text());
+		orderText.push(JQobjects[Random_num].text().match(/[A,B,C,D,E]/)[0]);
 		JQobjects.splice(Random_num, 1);
 	}
 	$("#showOrder").text(orderText.join(" "));
@@ -67,11 +69,14 @@ function reciveAndRes(JQobject, responseText) {
 		else $(this).css("color", "white");
 	});
 	visited_count ++;
-	if(visited_count == 5) caculate($("#info-bar"));
-	else AJAX(order[visited_count], reciveAndRes);
+	if(Gaming) {
+		if(visited_count == 5) caculate($("#info-bar"));
+		else AJAX(order[visited_count], reciveAndRes);
+	}
 }
 
 function AJAX(JQobject, callback) {
+	requestCounter++;
 	var xmlhttp = new XMLHttpRequest();
 	JQobject.children("span").html("...").show();
 	JQobject.attr("visited", "true");
@@ -80,10 +85,12 @@ function AJAX(JQobject, callback) {
 	JQobject.siblings().css("color", "#55b694");
 	xmlhttp.onreadystatechange=function() {
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				callback(JQobject, xmlhttp.responseText)									
+			if(Gaming && requestCounter == 1)
+				callback(JQobject, xmlhttp.responseText);
+			requestCounter--;									
 		}
 	}
-	xmlhttp.open("GET", true);
+	xmlhttp.open("POST", true);
 	xmlhttp.send();
 }
 	
