@@ -87,7 +87,7 @@ html, body {
 
 #control-ring-container {
   position: absolute;
-  width: 180px;
+  width: 190px;
   height: 180px;
   border-radius: 50%;
   bottom: 20px;
@@ -225,8 +225,19 @@ html, body {
 
 #showOrder {
   width: 200px;
-  bottom: 275px;
+  bottom: 401px;
   right: -48px;
   color: #56b994;
   position: absolute;
+}
+
+#showMsg {
+  width: 362px;
+  bottom: 275px;
+  right: -208px;
+  position: absolute;
+}
+
+#showMsg div span{
+  color: red;
 }
