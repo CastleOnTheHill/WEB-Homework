@@ -8,6 +8,7 @@ $(document).ready(function() {
 	$("#control-ring-container li").attr("requestCounter", "0");
 	$("#control-ring-container li").attr("nowIn", "");
 	$("#button").attr("Gaming", "");
+	$("#showMsg").hide();
 
 	$("#button").mouseleave(function() {
 		$("#button").attr("Gaming", "");
@@ -18,8 +19,12 @@ $(document).ready(function() {
 		$("#control-ring li").css("color", "white");
 		$("#info-bar").html("");
 		$("#control-ring-container li span").html("");
-		// if($("#button").data("events").click.length == 0) 	$("#button").one("click", Robot);
-		// console.log(($._data($("#button"),"events").click));
+		$("#showMsg").hide();
+		$("#showMsg div").each(function() {
+			if($(this).attr("id") != "Bubble")
+				$(this).html($(this).attr("id") + ": ");
+			else $(this).html("大气泡: ");
+		});
 		if(typeof($._data(document.getElementById("button"), "events").click) == "undefined") $("#button").one("click", Robot);
 	});
 
@@ -32,6 +37,7 @@ function Robot() {
 	var functionOrder = [];
 	var orderText = ["The Order is"];
 	$("#button").attr("Gaming", "true");
+	$("#showMsg").show();
 	$("#control-ring-container li").each(function() {
 		JQobjects.push($(this));
 	});
