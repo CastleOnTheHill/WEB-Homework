@@ -1,0 +1,35 @@
+doctype html
+html
+	head
+		title Regist
+		meta(charset="utf-8")
+		link(rel="stylesheet",type="text/css",href="register.css")
+		link(rel="shortcut icon" href="favicon.ico")
+		link(rel="bookmark" href="favicon.ico")
+		script(src="http://code.jquery.com/jquery-1.6.3.min.js")
+		script(type="text/javascript" src="register.js")
+	body
+		p= "Create a New Account"
+		form(method="post")
+			div
+				input(type="text" name="name" placeholder="Enter your name")
+			#msg1.msg #{nameRE}
+			div
+				input(type="password" name="passWord" placeholder="Enter your password")
+			#msg5.msg #{passWordRE}
+			div
+				input(type="password" name="passwordC" placeholder="check your password")
+			#msg6.msg
+			div
+				input(type="text" name="schoolId" placeholder="Enter your SchoolID")
+			#msg2.msg #{schoolIdRE}
+			div
+				input(type="text" name="phoneNumber" placeholder="Enter your PhoneNumber")
+			#msg3.msg #{phoneNumberRE}
+			div
+				input(type="text" name="email" placeholder="Enter your Email Address")
+			#msg4.msg #{emailRE}
+			.Button
+				button(type="reset")= "RESET"
+			.Button
+				button#sub(type="submit")= "SUBMIT"

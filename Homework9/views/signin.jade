@@ -1,0 +1,21 @@
+doctype html
+
+html
+	head
+		link(rel="shortcut icon" href="favicon.ico")
+		link(rel="bookmark" href="favicon.ico")
+		link(rel="stylesheet" type="text/css" href="signin.css")
+		script(src="http://code.jquery.com/jquery-1.6.3.min.js")
+		script(type="text/javascript" src="signin.js")
+	body
+		p= "Sign In"
+		#msg #{msg}
+		form(method="post")
+			div
+				input(type="text" name="name" placeholder="Enter your name")
+			div
+				input(type="password" name="passWord" placeholder="Enter your passWord")
+			.Button
+				button#sub(type="submit")= "SUBMIT"
+			.Button
+				button#regist(type="button")= "REGIST"

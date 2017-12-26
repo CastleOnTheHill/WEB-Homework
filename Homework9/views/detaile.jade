@@ -1,0 +1,22 @@
+doctype html
+html
+	head
+		title userDetaile
+		link(rel="stylesheet" type="text/css" href="detailed.css")
+		link(rel="shortcut icon" href="favicon.ico")
+		link(rel="bookmark" href="favicon.ico")
+		script(src="http://code.jquery.com/jquery-1.6.3.min.js")
+		script(type="text/javascript" src="detailed.js")
+	body
+		#msg #{msg}
+		form
+			p= "Detaile Information"
+			.userName name:
+				span= name
+			.schoolId SchoolId:
+				span= schoolId
+			.phoneNumber PhoneNumber:
+				span= phoneNumber				
+			.email Email:
+				span= email
+		button#quit(type="button")= "退出登入"
